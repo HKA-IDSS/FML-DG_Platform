@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "data-governance-full-stack"
+version = "0.1.0"
+description = ""
+authors = ["José Antonio Peregrina Pérez <jsperegrina1@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

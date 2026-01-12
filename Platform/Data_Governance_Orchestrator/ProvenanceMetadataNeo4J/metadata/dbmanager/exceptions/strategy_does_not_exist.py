@@ -1,0 +1,2 @@
+class StrategyDoesNotExistException(Exception):
+    pass

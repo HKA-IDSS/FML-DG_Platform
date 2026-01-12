@@ -1,0 +1,40 @@
+---
+dbconfig:
+  collection: data_governance
+  # Docker
+  dburl: "mongodb://mongo-dg:mongo-dg-artefacts@mongo"
+  # Local
+#  dburl: "mongodb://mongo-dg:mongo-dg-artefacts@localhost"
+  port: ":27017"
+
+#mysqlconfig:
+#  dburl: "mysql-db"
+#  port: ":3306"
+#  user: "root"
+#  password: "example"
+#  database: "results"
+
+minioconfig:
+#  dburl: "127.0.0.1"
+  dburl: "minio"
+  port: ":9000"
+  accesskey: "fastapi"
+  secretkey: "fastapi_secretkey"
+
+keycloak:
+  url: http://kc:8080/auth #Auth with reverse proxy
+  introspect_url: http://localhost/auth #Auth with reverse proxy
+  # Local
+#  url: http://localhost:8080/
+  realm: fml
+  api_client_id: fml-orchestrator-docker-api
+  api_client_secret: {replace} # secret only for development purposes. It needs to be configured by user.
+  admin_client_id: admin-cli
+  admin_client_secret: {replace} # secret only for development purposes
+
+#metadata:
+#  # docker
+#  host: metadata-api
+#  #local
+##  host: localhost
+#  port: 5001

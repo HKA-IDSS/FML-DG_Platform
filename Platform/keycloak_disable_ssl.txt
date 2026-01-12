@@ -1,0 +1,6 @@
+In docker image.
+
+./kcadm.sh config credentials --server http://localhost:8080 --realm master --user hkakeycloak
+Logging into http://localhost:8080 as user admin of realm master
+Enter password: hkakeycloak
+./kcadm.sh update realms/master -s sslRequired=NONE

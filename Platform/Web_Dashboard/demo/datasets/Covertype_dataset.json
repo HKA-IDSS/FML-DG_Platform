@@ -1,0 +1,151 @@
+{
+    "name": "Covertype_Dataset2",
+    "description": "Common covertype dataset2",
+    "features": [
+        {
+            "name":"Elevation",
+            "description":"The elevation of the terrain where the forest is located.",
+            "order_in_dataset": 1,
+            "type": "integer",
+            "valid_values": [0, 4000],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"Aspect",
+            "description":"No idea.",
+            "order_in_dataset": 2,
+            "type": "integer",
+            "valid_values": [0, 500],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"Slope",
+            "description":"Slope of the terrain",
+            "order_in_dataset": 3,
+            "type": "integer",
+            "valid_values": [-100, 100],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"Horizontal_Distance_To_Roadways",
+            "description":"Distance to the closest roadway.",
+            "order_in_dataset": 5,
+            "type": "integer",
+            "valid_values": [0, 2000],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"Hillshade_9am",
+            "description":"Hillshade at 9am.",
+            "order_in_dataset": 6,
+            "type": "integer",
+            "valid_values": [0, 4000],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"Hillshade_Noon",
+            "description":"Hillshade at Noon.",
+            "order_in_dataset": 7,
+            "type": "integer",
+            "valid_values": [0, 4000],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"Hillshade_3pm",
+            "description":"Hillshade at 3pm.",
+            "order_in_dataset": 8,
+            "type": "integer",
+            "valid_values": [0, 4000],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"Horizontal_Distance_To_Fire_Points",
+            "description":"Distance from a fire point. (No idea)",
+            "order_in_dataset": 9,
+            "type": "integer",
+            "valid_values": [0, 5000],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"Wilderness_Area",
+            "description":"One hot encoded version of Wilderness Area options.",
+            "order_in_dataset": 10,
+            "type": "integer",
+            "valid_values": [0, 1],
+            "group": true,
+            "sub_features": [
+                "Wilderness_Area_1",
+                "Wilderness_Area_2",
+                "Wilderness_Area_3",
+                "Wilderness_Area_4"
+            ]
+        },
+        {
+            "name":"Soil_Type",
+            "description":"One hot encoded version of Soil Type.",
+            "order_in_dataset": 11,
+            "type": "integer",
+            "valid_values": [0, 1],
+            "group": true,
+            "sub_features": [
+                "Soil_Type_1",
+                "Soil_Type_2",
+                "Soil_Type_3",
+                "Soil_Type_4",
+                "Soil_Type_5",
+                "Soil_Type_6",
+                "Soil_Type_7",
+                "Soil_Type_8",
+                "Soil_Type_9",
+                "Soil_Type_10",
+                "Soil_Type_11",
+                "Soil_Type_12",
+                "Soil_Type_13",
+                "Soil_Type_14",
+                "Soil_Type_15",
+                "Soil_Type_16",
+                "Soil_Type_17",
+                "Soil_Type_18",
+                "Soil_Type_19",
+                "Soil_Type_20",
+                "Soil_Type_21",
+                "Soil_Type_22",
+                "Soil_Type_23",
+                "Soil_Type_24",
+                "Soil_Type_25",
+                "Soil_Type_26",
+                "Soil_Type_27",
+                "Soil_Type_28",
+                "Soil_Type_29",
+                "Soil_Type_30",
+                "Soil_Type_31",
+                "Soil_Type_32",
+                "Soil_Type_33",
+                "Soil_Type_34",
+                "Soil_Type_35",
+                "Soil_Type_36",
+                "Soil_Type_37",
+                "Soil_Type_38",
+                "Soil_Type_39",
+                "Soil_Type_40"
+            ]
+        },
+        {
+            "name":"Cover_Type",
+            "description":"Type of forest. Label of the dataset",
+            "order_in_dataset": 12,
+            "type": "string",
+            "valid_values": ["Lodgepole Pine", "Spruce/Fir", "Ponderosa Pine", "Cottonwood/Willow", "Krummholz", "Douglas-fir", "Aspen"],
+            "group": false,
+            "sub_features": []
+        }
+    ]
+}

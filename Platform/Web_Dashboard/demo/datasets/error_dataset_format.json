@@ -1,0 +1,23 @@
+{
+    "name": "Adult_Dataset",
+    "description": "Common adult dataset",
+    "features": [
+        {
+            "name":"age",
+            "description":"The age of the person.",
+            "order_in_dataset": 1,
+            "type": "integer",
+            "valid_values": [18, 100],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"workclass",
+            "description":"Workclass classification of the person.",
+            "order_in_dataset": 2,
+            "valid_values": ["State-gov", "private", "Self-emp-not-inc", "Federal-gov", "Local-gov"],
+            "group": false,
+            "sub_features": []
+        }
+    ]
+}

@@ -1,0 +1,216 @@
+services:
+  mongo:
+    image: mongo
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo-dg
+      MONGO_INITDB_ROOT_PASSWORD: mongo-dg-artefacts
+    networks:
+      - full-stack-network
+    volumes:
+      - mongodb:/data/mongodb
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: mongo-dg
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mongo-dg-artefacts
+      ME_CONFIG_MONGODB_URL: mongodb://mongo-dg:mongo-dg-artefacts@mongo:27017/
+    networks:
+      - full-stack-network
+
+  mysql-db:
+    image: mysql:8.4
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+#    command: --mysql-native-password=ON
+    restart: always
+    ports:
+      - 3306:3306
+    command:
+      - --mysql-native-password=ON
+    environment:
+      MYSQL_DATABASE: keycloak
+      MYSQL_ROOT_USER: dg-connection
+      MYSQL_ROOT_PASSWORD: dg-connection
+      MYSQL_USER: dg-connection
+      MYSQL_PASSWORD: dg-connection
+    volumes:
+      - ./MySQLDBInitialization:/docker-entrypoint-initdb.d
+      - mysql_volume:/var/lib/mysql
+    networks:
+      - full-stack-network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8282:8282"
+    command:
+      - 'php'
+      - '-S'
+      - '[::]:8282'
+      - '-t'
+      - '/var/www/html'
+    networks:
+      - full-stack-network
+
+  kc:
+    image: quay.io/keycloak/keycloak:26.4.0
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    volumes:
+      - ./Data_Governance_Orchestrator/realms/:/opt/keycloak/data/import
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: hkakeycloak
+      KC_BOOTSTRAP_ADMIN_PASSWORD: hkakeycloak
+#      KC_HOSTNAME: federated-learning-data-governance
+#      KC_HOSTNAME_URL: http://localhost/auth
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_STRICT: false
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HTTP_RELATIVE_PATH: /auth
+#      KC_HOSTNAME_STRICT_HTTPS: false
+#      KC_ADMIN: keycloakHKAUCA
+#      KC_ADMIN_PASSWORD: keycloakHKAUCA
+      KC_DB: mysql
+      KC_DB_URL: jdbc:mysql://mysql-db/keycloak
+#      KC_DB_URL_HOST: mysql-db
+      KC_DB_USERNAME: dg-connection
+      KC_DB_PASSWORD: dg-connection
+      KC_DB_DATABASE: keycloak
+      KC_HTTP_ENABLED: true
+      KC_PROXY_ADDRESS_FORWARDING: true
+      KC_PROXY_HEADERS: xforwarded
+
+    command:
+      - start-dev
+      - --import-realm
+      # Re-declare these here to ensure CLI takes precedence
+      - --verbose
+#      - --features=preview
+#      - --features=scripts
+      # Production
+      # - start
+      # - --import-realm
+      # - --optimized
+    depends_on:
+      - mysql-db
+    networks:
+      - full-stack-network
+#      - host-network
+
+  rest-api:
+    build:
+      context: Data_Governance_Orchestrator
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 5100:5100
+    networks:
+      - full-stack-network
+      - minio-net
+    depends_on:
+      - mongo
+      - kc
+    environment:
+      WAIT_HOSTS: mongo:27017, neo4j:7687
+
+  neo4j:
+    container_name: neo4j
+    image: neo4j:latest
+    restart: unless-stopped
+    ports:
+      - 7474:7474
+      - 7687:7687
+    environment:
+      - NEO4J_AUTH=neo4j/provenance-dg
+      - NEO4J_dbms_usage__report_enabled=false
+    volumes:
+      - neo4jdata:/data
+      - neo4jdata:/logs
+    networks:
+      - full-stack-network
+
+  metadata-api:
+    build:
+      context: Data_Governance_Orchestrator/ProvenanceMetadataNeo4J
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 5001:5001
+    networks:
+      - full-stack-network
+    depends_on:
+      - neo4j
+    environment:
+      WAIT_HOSTS: neo4j:7687
+
+  fl-server-fastapi:
+    build:
+      context: ./FLServerFastAPI
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "20000:20000"
+      - "54000:54000"
+    networks:
+      - full-stack-network
+#      - host-network
+    depends_on:
+      - kc
+      - mongo
+
+  web-dashboard:
+    build:
+      context: ./Web_Dashboard
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    networks:
+      - full-stack-network
+#      - host-network
+    depends_on:
+      - rest-api
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+#    network_mode: "host"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+#      - ./certs:/etc/ssl/certs:ro
+    depends_on:
+      - kc
+      - rest-api
+      - fl-server-fastapi
+      - web-dashboard
+    networks:
+      - full-stack-network
+
+
+
+networks:
+  full-stack-network:
+  minio-net:
+    name: minio-net
+    external: true
+#  host-network:
+#    name: host-network
+#    driver: host
+
+
+volumes:
+  mongodb:
+  mysql_volume:
+  neo4jdata:

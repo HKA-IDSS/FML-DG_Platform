@@ -1,0 +1,27 @@
+[project]
+name = "FLTrainingExperiments"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "José Antonio Peregrina Pérez",email = "jsperegrina1@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10, <3.12"
+dependencies = [
+    "keras (>=3.0.0,<4.0.0)",
+    "flwr (==1.9.0)",
+    "scikit-learn (>=1.7.2,<2.0.0)",
+    "pandas (>=2.3.3,<3.0.0)",
+    "ipykernel (>=7.0.1,<8.0.0)",
+    "tensorflow (>=2.19.0)",
+#    "tensorflow-io-gcs-filesystem(>=0.30.0, <0.31.0)",
+    "xgboost (>=3.1.0,<4.0.0)"
+]
+
+[tool.poetry]
+#packages = [{include = "fl_training_experiments", from = "src"}]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

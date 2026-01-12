@@ -1,0 +1,2 @@
+class RelationshipDoesNotExistException(Exception):
+    pass

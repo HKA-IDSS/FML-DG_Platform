@@ -1,0 +1,160 @@
+{
+    "name": "Adult_Dataset",
+    "description": "Common adult dataset",
+    "features": [
+        {
+            "name":"age",
+            "description":"The age of the person.",
+            "order_in_dataset": 1,
+            "type": "integer",
+            "valid_values": [18, 100],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"workclass",
+            "description":"Workclass classification of the person.",
+            "order_in_dataset": 2,
+            "type": "string",
+            "valid_values": ["State-gov", "private", "Self-emp-not-inc", "Federal-gov", "Local-gov"],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"fnlwgt",
+            "description":"No idea.",
+            "order_in_dataset": 3,
+            "type": "integer",
+            "valid_values": [10000, 1000000],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"education",
+            "description":"Level of education",
+            "order_in_dataset": 4,
+            "type": "string",
+            "valid_values": ["Bachelors",  "HS-grad",  "11th",  "Masters",  "9th",
+             "Some-college",  "Assoc-acdm",  "Assoc-voc",  "7th-8th",
+             "Doctorate",  "Prof-school",  "5th-6th",  "10th",  "1st-4th",
+             "Preschool",  "12th"],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"education-num",
+            "description":"Level of education on number",
+            "order_in_dataset": 5,
+            "type": "integer",
+            "valid_values": [1, 17],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"marital-Status",
+            "description":"Current marital status of the person.",
+            "order_in_dataset": 6,
+            "type": "string",
+            "valid_values": [ "Never-married",  "Married-civ-spouse",  "Divorced",
+             "Married-spouse-absent",  "Separated",  "Married-AF-spouse",
+             "Widowed"],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"Occupation",
+            "description":"",
+            "order_in_dataset": 7,
+            "type": "string",
+            "valid_values": [ "Adm-clerical",  "Exec-managerial",  "Handlers-cleaners",
+             "Prof-specialty",  "Other-service",  "Sales",  "Craft-repair",
+             "Transport-moving",  "Farming-fishing",  "Machine-op-inspct",
+             "Tech-support", "Protective-serv",  "Armed-Forces",
+             "Priv-house-serv"],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"relationship",
+            "description":"Status of the relationship.",
+            "order_in_dataset": 8,
+            "type": "string",
+            "valid_values": [ "Not-in-family",  "Husband",  "Wife",  "Own-child",  "Unmarried",
+             "Other-relative"],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"race",
+            "description":"Race of the person",
+            "order_in_dataset": 9,
+            "type": "string",
+            "valid_values": [ "White",  "Black",  "Asian-Pac-Islander",  "Amer-Indian-Eskimo",
+             "Other"],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"Sex",
+            "description":"Sex of the person",
+            "order_in_dataset": 10,
+            "type": "string",
+            "valid_values": ["Male", "Female"],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"capital-gain",
+            "description":"Additional capital that the person ears. I guess assets.",
+            "order_in_dataset": 11,
+            "type": "integer",
+            "valid_values": [0, 100000],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"capital-loss",
+            "description":"Something that the person may owe.",
+            "order_in_dataset": 12,
+            "type": "integer",
+            "valid_values": [0, 10000],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"hours-per-week",
+            "description":"Hours of work per week.",
+            "order_in_dataset": 13,
+            "type": "integer",
+            "valid_values": [0, 100],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"native-country",
+            "description":"Country of origin of the person.",
+            "order_in_dataset": 14,
+            "type": "string",
+            "valid_values": [ "United-States",  "Cuba",  "Jamaica",  "India", "Mexico",
+             "South",  "Puerto-Rico",  "Honduras",  "England",  "Canada",
+             "Germany",  "Iran",  "Philippines",  "Italy", "Poland",
+             "Columbia",  "Cambodia",  "Thailand",  "Ecuador",  "Laos",
+             "Taiwan",  "Haiti",  "Portugal",  "Dominican-Republic",
+             "El-Salvador",  "France",  "Guatemala",  "China",  "Japan",
+             "Yugoslavia",  "Peru",  "Outlying-US(Guam-USVI-etc)",  "Scotland",
+             "Trinadad&Tobago",  "Greece",  "Nicaragua",  "Vietnam",  "Hong",
+             "Ireland",  "Hungary",  "Holand-Netherlands"],
+            "group": false,
+            "sub_features": []
+        },
+        {
+            "name":"label",
+            "description":"Label",
+            "order_in_dataset": 15,
+            "type": "string",
+            "valid_values": ["<=50K", ">50K"],
+            "group": false,
+            "sub_features": []
+        }
+    ]
+}

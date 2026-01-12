@@ -1,0 +1,2 @@
+class GroupDoesNotExistException(Exception):
+    pass

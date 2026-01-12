@@ -1,0 +1,32 @@
+[project]
+name = "fl-client"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "José Antonio Peregrina Pérez",email = "jsperegrina1@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10, <3.12"
+dependencies = [
+    "python-keycloak (>=5.8.1)",
+    "websockets (>=15.0.1,<16.0.0)",
+    "flwr (==1.9.0)",
+    "xgboost (>=3.0.5,<4.0.0)",
+    "pysvcmetrics (>=0.1,<0.2)",
+    "util (>=0.0.1,<0.0.2)",
+    "scikit-learn (>=1.7.2,<2.0.0)",
+    "keras (>=3.0.0,<4.0.0)",
+    "tensorflow (>=2.10.0)",
+    "tensorflow-io-gcs-filesystem (>=0.30.0, <0.31.0)",
+    "pyyaml (>=6.0.3,<7.0.0)",
+    "pandas",
+    "numpy",
+    "great-expectations (>=1.6.4)"
+]
+
+[tool.poetry]
+packages = [{include = "fl-client", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

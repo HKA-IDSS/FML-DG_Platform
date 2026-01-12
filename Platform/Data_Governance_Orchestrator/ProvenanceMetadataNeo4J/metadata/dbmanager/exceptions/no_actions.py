@@ -1,0 +1,2 @@
+class NoActionException(Exception):
+    pass
