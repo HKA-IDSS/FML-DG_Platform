@@ -13,9 +13,10 @@ docker run \
 
 wget https://dl.min.io/client/mc/release/linux-amd64/mc
 chmod +x mc
-./mc --help
 
-mc admin user add minio fastapi fastapi_secret
+./mc alias set minio http://localhost:9000 MACTest MACTest9001
+
+./mc admin user add minio fastapi fastapi_secret
 
 
 

@@ -30,12 +30,17 @@ async def register_dataset(access_token, session_to_participate, selected_datase
         expectationService = GreatExpectationService()
         expectationService.add_expectations_from_configuration(expectations)
 
+        pandas_dataset = pd.read_csv("src/fl-client/data/datasets_to_register/" + selected_dataset, index_col=0)
+        groups_of_columns = list(pandas_dataset.select_dtypes(include=['str']).columns)
+        for column in groups_of_columns:
+            pandas_dataset[column] = pandas_dataset[column].astype("string")
+
+
         # Run validation on specified dataset
-        validation_result = expectationService.run_validation_on_pandas(pd.read_csv(
-            "src/fl-client/data/datasets_to_register/" + selected_dataset, index_col=0
-        ))
+        validation_result = expectationService.run_validation_on_pandas(pandas_dataset)
         await websocket.send(str(validation_result.success))
         if validation_result.success:
+            os.makedirs("src/fl-client/data/registered_datasets", exist_ok=True)
             df = pd.read_csv("src/fl-client/data/datasets_to_register/" + selected_dataset, index_col=0)
             dataset_hash = str(int(hashlib.sha256(pd.util.hash_pandas_object(df, index=True).values).hexdigest(), 16))
             await websocket.send(dataset_hash)

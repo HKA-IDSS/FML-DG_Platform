@@ -28,9 +28,9 @@ keycloak:
 #  url: http://localhost:8080/
   realm: fml
   api_client_id: fml-orchestrator-docker-api
-  api_client_secret: {replace} # secret only for development purposes. It needs to be configured by user.
+  api_client_secret: PxwElMkMfvAXDINKDpO1IQyIfVCJ1QFN # secret only for development purposes. It needs to be configured by user.
   admin_client_id: admin-cli
-  admin_client_secret: {replace} # secret only for development purposes
+  admin_client_secret: S5Z5IEmqqJFqBcrkaSCyLoxF6Cue0S0t # secret only for development purposes
 
 #metadata:
 #  # docker
