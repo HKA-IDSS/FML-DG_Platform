@@ -1,9 +1,5 @@
 # A platform for Federated Machine Learning Data Governance (FML-DG).
 
-### Para acceder a la plataforma:
-
-URL: 10.162.90.200:3000
-
 ### Instrucciones
 
 This is the platform implementing the application of Data Governance to Federated Learning, following the research presented in the paper *Towards Data Governance for Federated Machine Learning* (link: https://link.springer.com/chapter/10.1007/978-3-031-23298-5_5).
