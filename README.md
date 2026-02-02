@@ -3,6 +3,34 @@ The Federated Machine Learning Data Governance (FML-DG) platform presents a plat
 
 ## Overall Structure
 
+The FML-DG platform, as well as the experiment settings can be divided in the following structure.
+
+```
+FML-DG-Platform
+├── ClientForFlower
+│   ├── FLTrainingExperimentsClient1
+│   ├── FLTrainingExperimentsClient2
+│   └── FLTrainingExperimentsClient3
+├── ClientsForPlatform
+│   ├── FLClient1
+│   ├── FLClient2
+│   └── FLClient3
+├── FLTrainingExperimentsServer
+├── Platform
+├── FlowerInstructions.md
+└── PlatformInstructions.md
+```
+
+The platform is fully located in the Platform folder, which contains all components as well as a docker compose file
+to run everything. At the moment, the different components of the platform are receiving updates, which will be included
+in future updates.
+
+The folder FLTrainingExperimentsServer contains the Flower server, which runs using poetry for reproducibility. Only
+code subject to change might be ip. It is currently configured to run locally.
+
+Finally, the clients for the platform and the flower server are in their respective folders. Each folders contains the
+directory with the three clients, are the experiments were conducted in groups of three.
+
 ## Setup
 
 ### Platform
@@ -12,14 +40,23 @@ For the platform, there three steps for setting up the whole platform.
 ```shell
 sh ./run_minio.sh
 ```
-2. F
+2. Run the docker compose within the main folder with the command:
 
+```shell
+docker compose up --build -d
+```
 
-#### Additional Configuration: Keycloak
+3. Follow the additional configuration section for Keycloak below.
+
+[//]: # (#### Additional Configuration: Keycloak)
 
 The Keycloak component requires additional steps to make it work for the platform. Once the docker containers are 
-running, access the Keycloak administration console in [http://localhost:8080](http://localhost:8080). Then, perform the
-following configuration steps:
+running, access the Keycloak administration console in [http://localhost:8080](http://localhost:8080). Connect to it using the following
+credentials (they are defined in the docker compose file):
+- Username: hkakeycloak
+- password: hkakeycloak
+
+Then, perform the following configuration steps:
 
 1. First, go into the Realms selector, at the top left, and select the fml realm.
 2. Finally, we also add two redirect URLs to the following clients:
@@ -47,4 +84,29 @@ For this:
    2. Go to the Service Account Roles tab
    3. Click on Assign Role -> Client roles
    4. Search for *manage-users*, and select the option.
+
+### Flower Federated Framework
+
+No specific setup required from the Flower Server.
+
+## Usage
+
+### Platform
+
+To use the platform, follow these steps (this usage considers that you are running the platform locally):
+
+1. First, go to [http://localhost](http://localhost).
+2. Login as an admin with the credentials that were set up during the Keycloak setup.
+3. Use the Admin page to create organizations and users. The organizations have only a representative meaning,
+but the users can be used for those participating in the experiments. The credentials will be as follows:
+   - Username: (Username that was given by the admin)
+   - Password: password.
+
+### Flower Federated Framework
+
+To set up the Flower Server, run the following command within the folder _FLTrainingExperimentsServer_:
+```shell
+poetry run python src\fl-training-experiments\Client.py
+```
+
 
