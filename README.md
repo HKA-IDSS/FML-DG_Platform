@@ -1,6 +1,15 @@
 # FML-DG_Platform
 The Federated Machine Learning Data Governance (FML-DG) platform presents a platform for FL with Data Governance mechanisms following the paper: A Platform to Integrate Data Governance in Federated Learning. The project was developed under the Aura.ai project (https://www.h-ka.de/idss/aura-ai).
 
+## Disclaimer
+
+This repository was used for diverse experiments conducted with the collaboration of Professors of the University of 
+Cádiz. Some settings have been modified, like the connection ips of the different components, as well as the secrets of
+different components. At the moment, all secrets and passwords are hardcoded within the architecture, in order to make
+the reproduction of the architecture locally as straightforward as possible. Therefore, the platform is not production
+ready, and multiple settings need to be performed for preparing to production. These steps were considered beyond the
+scope of the work.
+
 ## Overall Structure
 
 The FML-DG platform, as well as the experiment settings can be divided in the following structure.
